@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% block content %}
-    <a class="m-1 btn btn-primary" href="{% url 'app1:add_item' %}">Add item</a>
     <table class="table">
         <thead>
             <tr>
@@ -15,7 +14,6 @@
             </tr>
         </thead>
         <tbody>
-            {% for item in item_list %}
                 <tr>
                     <td>{{ forloop.counter }}</td>
                     <td>{{ item.name }}</td>
@@ -48,7 +46,6 @@
                     </td>
 
                 </tr>
-            {% endfor %}
         </tbody>
     </table>
 {% endblock %}
