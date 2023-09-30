@@ -48,4 +48,4 @@ def deactivate_item(request, pk):
 
 def detail(request, pk):
     item = get_object_or_404(Item, pk=pk)
-    return redirect('app1:detail_item', pk=pk)
+    return render(request, 'app1/item_detail.html', {'item': item})
