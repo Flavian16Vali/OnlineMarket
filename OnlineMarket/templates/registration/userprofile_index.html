@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ request.user.username }}</td>
+                <td>
+                    <a class="btn btn-info" href="{% url 'userprofile:edit_account' request.user.id %}">Edit</a>
+                    <a class="btn btn-danger" href="{% url 'userprofile:delete_account' request.user.id %}">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

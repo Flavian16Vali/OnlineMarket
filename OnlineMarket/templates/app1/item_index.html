@@ -38,16 +38,17 @@
                     </td>
                     <td>{{ item.id_user }}</td>
                     <td>
-                        {% if item.id_user.id == request.user.id %}
-                            <a class="btn btn-danger" href="{% url 'app1:delete_item' item.id %}">Delete</a>
-                            {% if item.active is False %}
-                                <a class="btn btn-info" href="{% url 'app1:activate_item' item.id %}">Activate</a>
-                            {% else %}
-                                <a class="btn btn-warning" href="{% url 'app1:deactivate_item' item.id %}">Deactivate</a>
-                            {% endif %}
-                        {% else %}
-                            <a class="btn btn-info" href="{% url 'app1:detail_item' item.id %}">Info</a>
-                        {% endif %}
+                        <a class="btn btn-info" href="{% url 'app1:detail_item' item.id %}">Info</a>
+<!--                        {% if item.id_user.id == request.user.id %}-->
+<!--                            <a class="btn btn-danger" href="{% url 'app1:delete_item' item.id %}">Delete</a>-->
+<!--                            {% if item.active is False %}-->
+<!--                                <a class="btn btn-info" href="{% url 'app1:activate_item' item.id %}">Activate</a>-->
+<!--                            {% else %}-->
+<!--                                <a class="btn btn-warning" href="{% url 'app1:deactivate_item' item.id %}">Deactivate</a>-->
+<!--                            {% endif %}-->
+<!--                        {% else %}-->
+<!--                            <a class="btn btn-info" href="{% url 'app1:detail_item' item.id %}">Info</a>-->
+<!--                        {% endif %}-->
                     </td>
 
                 </tr>
