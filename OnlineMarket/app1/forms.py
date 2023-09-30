@@ -20,4 +20,10 @@ class ItemClass(forms.ModelForm):
     def __init__(self, pk, *args, **kwargs):
         super(ItemClass, self).__init__(*args, **kwargs)
         self.pk = pk
-        # self.fields['image'].required = False
+
+    def clean(self):
+        name_value = self.cleaned_data.get('name')
+        if self.pk:
+            if Item.objects.filter(name__icontains=name_value).exclude(id=self.pk).exists():
+                self._errors['name'] = self.error_class(['This name is used.'])
+        return self.cleaned_data

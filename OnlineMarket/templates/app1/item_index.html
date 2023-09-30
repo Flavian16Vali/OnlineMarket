@@ -18,7 +18,12 @@
                     <td>{{ item.name }}</td>
                     <td>{{ item.price }}</td>
                     <td>{{ item.type }}</td>
-                    <td><img src="{{ item.image.url }}" /></td>
+                    <td>
+                        {% if item.image %}
+                            <img src="{{ item.image.url }}" width="300" height="200">
+                        {% endif %}
+                    </td>
+
                 </tr>
             {% endfor %}
         </tbody>
