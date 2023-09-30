@@ -1,5 +1,6 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.views.generic import CreateView, ListView
 
@@ -25,3 +26,26 @@ class CreateItemView(CreateView):
 class ItemView(ListView):
     model = Item
     template_name = 'app1/item_index.html'
+
+
+@login_required
+def delete_item(request, pk):
+    Item.objects.filter(id=pk, id_user=request.user.id).delete()
+    return redirect('app1:list_items')
+
+
+@login_required
+def activate_item(request, pk):
+    Item.objects.filter(id=pk, id_user=request.user.id).update(active=1)
+    return redirect('app1:list_items')
+
+
+@login_required
+def deactivate_item(request, pk):
+    Item.objects.filter(id=pk, id_user=request.user.id).update(active=0)
+    return redirect('app1:list_items')
+
+
+def detail(request, pk):
+    item = get_object_or_404(Item, pk=pk)
+    return redirect('app1:detail_item', pk=pk)
