@@ -18,9 +18,9 @@ class CreateNewAccountForm(forms.ModelForm):
                                              'type': 'password'}),
         }
 
-    def __init__(self, pk, *args, **kwargs):
-        super(CreateNewAccountForm, self).__init__(*args, **kwargs)
-        self.pk = pk
+    # def __init__(self, pk, *args, **kwargs):
+    #     super(CreateNewAccountForm, self).__init__(*args, **kwargs)
+    #     self.pk = pk
 
     def clean(self):
         field_data = self.cleaned_data
