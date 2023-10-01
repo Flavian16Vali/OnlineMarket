@@ -1,8 +1,8 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, UpdateView
 
 from app1.forms import ItemClass
 from app1.models import Item
@@ -35,6 +35,27 @@ class ItemView(ListView):
     template_name = 'app1/item_index.html'
 
 
+class UpdateItemView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Item
+    form_class = ItemClass
+    template_name = 'app1/item_form.html'
+
+    def test_func(self):
+        if ((get_item := Item.objects.filter(id=self.kwargs['pk'])) and
+                get_item.exists() and
+                get_item.first().id_user_id == self.request.user.id):
+            return True
+        return False
+
+    def get_success_url(self):
+        return reverse('app1:list_items')
+
+    def get_form_kwargs(self):
+        data = super(UpdateItemView, self).get_form_kwargs()
+        data.update({'pk': self.kwargs['pk']})
+        return data
+
+
 @login_required
 def delete_item(request, pk):
     Item.objects.filter(id=pk, id_user=request.user.id).delete()
@@ -44,13 +65,15 @@ def delete_item(request, pk):
 @login_required
 def activate_item(request, pk):
     Item.objects.filter(id=pk, id_user=request.user.id).update(active=1)
-    return redirect('app1:list_items')
+    item = get_object_or_404(Item, pk=pk)
+    return render(request, 'app1/item_detail.html', {'item': item})
 
 
 @login_required
 def deactivate_item(request, pk):
     Item.objects.filter(id=pk, id_user=request.user.id).update(active=0)
-    return redirect('app1:list_items')
+    item = get_object_or_404(Item, pk=pk)
+    return render(request, 'app1/item_detail.html', {'item': item})
 
 
 def detail(request, pk):
