@@ -9,10 +9,17 @@ from app1.models import Item
 
 
 # Create your views here.
-class CreateItemView(CreateView):
+class CreateItemView(LoginRequiredMixin, CreateView):
     model = Item
     form_class = ItemClass
     template_name = 'app1/item_form.html'
+
+    def form_valid(self, form):
+        if form.is_valid():
+            item_instance = form.save(commit=False)
+            item_instance.id_user_id = self.request.user.id
+            item_instance.save()
+        return super(CreateItemView, self).form_valid(form)
 
     def get_success_url(self):
         return reverse('app1:list_items')

@@ -40,6 +40,9 @@
                             {% else %}
                                 <a class="btn btn-warning" href="{% url 'app1:deactivate_item' item.id %}">Deactivate</a>
                             {% endif %}
+                        {% elif request.user.is_authenticated %}
+                            <a class="btn btn-success" href="#">Buy</a>
+                            <a class="btn btn-info" href="#">Contact</a>
                         {% else %}
                             <a class="btn btn-success" href="{% url 'login' %}">Login</a>
                         {% endif %}
