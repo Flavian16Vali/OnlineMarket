@@ -9,7 +9,7 @@ from userprofile.forms import CreateNewAccountForm
 
 
 # Create your views here.
-class CreateNewAccountView(LoginRequiredMixin, CreateView):
+class CreateNewAccountView(CreateView):
     model = User
     template_name = 'app1/item_form.html'
     form_class = CreateNewAccountForm
@@ -24,7 +24,7 @@ class CreateNewAccountView(LoginRequiredMixin, CreateView):
             user_object.set_password(user_object.password)
             user_object.save()
 
-        return reverse('app1:list_items')
+        return reverse('login')
 
 
 class AccountView(LoginRequiredMixin, ListView):
