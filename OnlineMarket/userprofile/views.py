@@ -49,8 +49,9 @@ class UpdateUserView(LoginRequiredMixin, UpdateView):
         return super(UpdateUserView, self).form_valid(form)
 
     def get_success_url(self):
-        # return reverse('app1:user_account')
-        return reverse_lazy('userprofile:edit_account', kwargs={'pk': self.object.pk})
+        return reverse('login')
+        # return reverse_lazy('userprofile:edit_account', kwargs={'pk': self.object.pk})
+
 
 @login_required
 def delete_user(request, pk):
