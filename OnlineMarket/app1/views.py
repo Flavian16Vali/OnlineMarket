@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, ListView, UpdateView, DetailView
 
 from app1.forms import ItemClass
@@ -48,7 +48,8 @@ class UpdateItemView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return False
 
     def get_success_url(self):
-        return reverse('app1:list_items')
+        # return reverse('app1:list_items')
+        return reverse_lazy('app1:detail_item', kwargs={'pk': self.object.pk})
 
     def get_form_kwargs(self):
         data = super(UpdateItemView, self).get_form_kwargs()
