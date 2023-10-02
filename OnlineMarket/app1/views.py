@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-from django.views.generic import CreateView, ListView, UpdateView
+from django.views.generic import CreateView, ListView, UpdateView, DetailView
 
 from app1.forms import ItemClass
 from app1.models import Item
@@ -76,6 +76,14 @@ def deactivate_item(request, pk):
     return render(request, 'app1/item_detail.html', {'item': item})
 
 
-def detail(request, pk):
-    item = get_object_or_404(Item, pk=pk)
-    return render(request, 'app1/item_detail.html', {'item': item})
+class ItemDetailView(DetailView):
+    template_name = 'app1/item_detail.html'
+
+    def get_object(self, queryset=None):
+        pk = self.kwargs.get('pk')
+        return get_object_or_404(Item, id=pk)
+
+
+# def detail(request, pk):
+#     item = get_object_or_404(Item, pk=pk)
+#     return render(request, 'app1/item_detail.html', {'item': item})
