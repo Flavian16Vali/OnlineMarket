@@ -4,9 +4,9 @@ from django.forms import TextInput, PasswordInput
 
 
 class CreateNewAccountForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': "m-1 form-control text-white bg-dark",
-                                                                 'placeholder': "Insert the password",
-                                                                 'type': 'password'}))
+    # password = forms.CharField(widget=forms.PasswordInput(attrs={'class': "m-1 form-control text-white bg-dark",
+    #                                                              'placeholder': "Insert the password",
+    #                                                              'type': 'password'}))
     confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={'class': "m-1 form-control text-white bg-dark",
                                                                          'placeholder': "Insert the password",
                                                                          'type': 'password'}))
@@ -20,9 +20,9 @@ class CreateNewAccountForm(forms.ModelForm):
                                          'placeholder': "Username"}),
             'email': TextInput(attrs={'class': "m-1 form-control text-white bg-dark",
                                       'placeholder': "Email"}),
-            # 'password': PasswordInput(attrs={'class': "m-1 form-control text-white bg-dark",
-            #                                  'placeholder': "Insert the password",
-            #                                  'type': 'password'}),
+            'password': PasswordInput(attrs={'class': "m-1 form-control text-white bg-dark",
+                                             'placeholder': "Insert the password",
+                                             'type': 'password'}),
         }
 
     # def __init__(self, pk, *args, **kwargs):

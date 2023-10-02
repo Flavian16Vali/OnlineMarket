@@ -26,5 +26,8 @@ class ItemClass(forms.ModelForm):
         if self.pk:
             if Item.objects.filter(name__icontains=name_value).exclude(id=self.pk).exists():
                 self._errors['name'] = self.error_class(['This name is used.'])
+        else:
+            if Item.objects.filter(name__icontains=name_value).exists():
+                self._errors['name'] = self.error_class(['This name is used.'])
 
         return self.cleaned_data
