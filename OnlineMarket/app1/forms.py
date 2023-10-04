@@ -8,11 +8,12 @@ class ItemClass(forms.ModelForm):
 
     class Meta:
         model = Item
-        fields = ['name', 'price', 'type', 'image']
+        fields = ['name', 'price', 'currency', 'type', 'image']
 
         widgets = {
             'name': TextInput(attrs={'placeholder': 'Item name', 'class': 'form-control text-white bg-dark'}),
             'price': NumberInput(attrs={'placeholder': 'Item price', 'class': 'form-control text-white bg-dark'}),
+            'currency': Select(attrs={'class': 'form-control text-white bg-dark'}),
             'type': Select(attrs={'class': 'form-control text-white bg-dark'}),
             'image': ClearableFileInput(),
         }

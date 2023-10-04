@@ -15,15 +15,13 @@ class CreateNewAccountView(CreateView):
     form_class = CreateNewAccountForm
 
     def form_valid(self, form):
-        print(form)
+        if form.is_valid():
+            user_instance = form.save(commit=False)
+            user_instance.set_password(form.cleaned_data['password'])
+            user_instance.save()
         return super(CreateNewAccountView, self).form_valid(form)
 
     def get_success_url(self):
-        if (user_instance := User.objects.filter(id=self.object.id)) and user_instance.exists():
-            user_object = user_instance.first()
-            user_object.set_password(user_object.password)
-            user_object.save()
-
         return reverse('login')
 
 
