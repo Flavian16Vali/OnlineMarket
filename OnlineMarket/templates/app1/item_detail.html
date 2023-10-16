@@ -12,6 +12,7 @@
                 <th>Available</th>
                 <th>Posted by</th>
                 <th>Posted at</th>
+                <th>Edited at</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -24,7 +25,7 @@
                     <td>{{ item.type }}</td>
                     <td>
                         {% if item.image %}
-                            <img src="{{ item.image.url }}" width="300" height="200">
+                            <img src="{{ item.image.url }}" width="300" height="200" class="img-thumbnail" alt="Cinque Terre">
                         {% endif %}
                     </td>
                     <td>
@@ -36,6 +37,7 @@
                     </td>
                     <td>{{ item.id_user }}</td>
                     <td>{{ item.posted_date }}</td>
+                    <td>{{ item.edited_date }}</td>
                     <td>
                         {% if item.id_user.id == request.user.id %}
                             <a class="btn btn-primary" href="{% url 'app1:edit_item' item.id %}">Edit</a>
