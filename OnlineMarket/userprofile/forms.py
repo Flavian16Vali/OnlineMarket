@@ -2,6 +2,10 @@ from django import forms
 from django.contrib.auth.models import User
 from django.forms import TextInput, PasswordInput
 
+from OnlineMarket.utils import get_exchange_rates
+
+PREFERRED_CURRENCY = [(key, key) for key in get_exchange_rates().keys()]
+
 
 class CreateNewAccountForm(forms.ModelForm):
     # password = forms.CharField(widget=forms.PasswordInput(attrs={'class': "m-1 form-control text-white bg-dark",
@@ -10,6 +14,8 @@ class CreateNewAccountForm(forms.ModelForm):
     confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={'class': "m-1 form-control text-white bg-dark",
                                                                          'placeholder': "Insert the password",
                                                                          'type': 'password'}))
+    preference = forms.ChoiceField(choices=(('', 'Please select your preferred currency'),) + tuple(PREFERRED_CURRENCY))
+    preference.widget.attrs['class'] = 'form-control text-white bg-dark'
 
     class Meta:
         model = User

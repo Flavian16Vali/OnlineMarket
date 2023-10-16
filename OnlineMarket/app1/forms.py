@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import TextInput, NumberInput, Select, ClearableFileInput
 
-from app1.models import Item, ITEM_CHOICES
+from app1.models import Item
 
 
 class ItemClass(forms.ModelForm):

@@ -11,6 +11,7 @@
                 <th>Image</th>
                 <th>Available</th>
                 <th>Posted by</th>
+                <th>Posted at</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -34,6 +35,7 @@
                         {% endif %}
                     </td>
                     <td>{{ item.id_user }}</td>
+                    <td>{{ item.posted_date }}</td>
                     <td>
                         {% if item.id_user.id == request.user.id %}
                             <a class="btn btn-primary" href="{% url 'app1:edit_item' item.id %}">Edit</a>
