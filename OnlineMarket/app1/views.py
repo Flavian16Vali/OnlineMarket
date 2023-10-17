@@ -34,6 +34,25 @@ class ItemView(ListView):
     model = Item
     template_name = 'app1/item_index.html'
 
+    def get_queryset(self):
+        search_query = self.request.GET.get('search', '')
+
+        queryset = Item.objects.filter(name__icontains=search_query)
+
+        return queryset
+
+# def search_items(request):
+#     query = request.GET.get('query', '')
+#     items = Item.objects
+#
+#     if query:
+#         items = items.filter(name__icontains=query)
+#
+#     return render(request, 'app1/item_index.html', {
+#         'items': items,
+#         'query': query,
+#     })
+
 
 class UpdateItemView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Item
