@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.forms import TextInput, PasswordInput
 
 from OnlineMarket.utils import get_exchange_rates
+from userprofile.models import CustomUser
 
 PREFERRED_CURRENCY = [(key, key) for key in get_exchange_rates().keys()]
 
@@ -18,8 +19,8 @@ class CreateNewAccountForm(forms.ModelForm):
     preference.widget.attrs['class'] = 'form-control text-white bg-dark'
 
     class Meta:
-        model = User
-        fields = ['username', 'email', 'password']
+        model = CustomUser
+        fields = ['username', 'email', 'password', 'preferred_currency']
 
         widgets = {
             'username': TextInput(attrs={'class': "m-1 form-control text-white bg-dark",

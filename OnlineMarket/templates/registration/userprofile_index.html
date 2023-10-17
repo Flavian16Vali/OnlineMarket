@@ -4,12 +4,14 @@
         <thead>
             <tr>
                 <th>Username</th>
+                <th>Currency</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td>{{ request.user.username }}</td>
+                <td>{{ request.user.customuser.preferred_currency }}</td>
                 <td>
                     <a class="btn btn-info" href="{% url 'userprofile:edit_account' request.user.id %}">Edit</a>
                     <a class="btn btn-danger" href="{% url 'userprofile:delete_account' request.user.id %}">Delete</a>

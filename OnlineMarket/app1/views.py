@@ -83,8 +83,3 @@ class ItemDetailView(DetailView):
     def get_object(self, queryset=None):
         pk = self.kwargs.get('pk')
         return get_object_or_404(Item, id=pk)
-
-
-# def detail(request, pk):
-#     item = get_object_or_404(Item, pk=pk)
-#     return render(request, 'app1/item_detail.html', {'item': item})

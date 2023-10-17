@@ -1,0 +1,40 @@
+.errorlist {
+    color: red;
+}
+
+.container {
+    display: flex; /* Acesta este un stil CSS care face ca elementele să fie așezate pe același rând */
+}
+
+.input {
+    margin-right: 70px; /* Spațiu între input și buton */
+}
+
+.form-group {
+    display: flex;
+        align-items: center;
+}
+.form-group input {
+    margin-right: 10px;
+}
+
+.container-left {
+    float: left;
+    width: 25%;
+}
+
+.container-right {
+    float: right;
+    width: 25%;
+}
+
+.full-width-container {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
+    margin-right: 80px;
+}
+
+.clear {
+    clear: both;
+}
