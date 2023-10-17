@@ -3,7 +3,7 @@
 {% block title %}{{ item.name }}{{% endblock %}
 
 {% block content %}
-    <div class="m-1 col-4">
+    <div class="m-1 col-5">
 <!--        <form>-->
             <form method="get" action="{% url 'app1:list_items' %}">
                 <div class="form-group">
@@ -11,6 +11,17 @@
                     <input class="m-1 form-control text-white bg-dark" name="search" value="{{ query }}"
                            type="text" placeholder="Find a toy, a video game, etc...">
                     <button class="m-1 btn btn-info">Search</button>
+
+                    <form method="get" action="{% url 'app1:list_items' %}">
+                        <label for="category">Select a category:</label>
+                        <select class="m-2 form-control text-white bg-dark" id="category" name="category">
+                            <option value="">All categories</option>
+                            {% for choice in ITEM_CHOICES %}
+                                <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                            {% endfor %}
+                        </select>
+                        <button class="m-1 btn btn-info" type="submit">Filter</button>
+                    </form>
                 </div>
             </form>
 <!--        </form>-->

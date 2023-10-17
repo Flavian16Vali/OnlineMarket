@@ -1,4 +1,5 @@
 import requests
+from django.shortcuts import render
 
 
 def get_exchange_rates(currency='RON'):
@@ -6,3 +7,6 @@ def get_exchange_rates(currency='RON'):
     response = requests.get(url)
     data = response.json()
     return data.get("conversion_rates", {})
+
+
+ITEM_CHOICES = (('Toys', 'Toys'), ('Sport', 'Sport'), ('Animals', 'Animals'))

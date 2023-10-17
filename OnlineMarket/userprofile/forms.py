@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.forms import TextInput, PasswordInput
+from django.forms import TextInput, PasswordInput, Select
 
 from OnlineMarket.utils import get_exchange_rates
 from userprofile.models import CustomUser
@@ -15,18 +15,17 @@ class CreateNewAccountForm(forms.ModelForm):
     confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={'class': "m-1 form-control text-white bg-dark",
                                                                          'placeholder': "Insert the password",
                                                                          'type': 'password'}))
-    preference = forms.ChoiceField(choices=(('', 'Please select your preferred currency'),) + tuple(PREFERRED_CURRENCY))
-    preference.widget.attrs['class'] = 'form-control text-white bg-dark'
 
     class Meta:
         model = CustomUser
-        fields = ['username', 'email', 'password', 'preferred_currency']
+        fields = ['username', 'email', 'preferred_currency', 'password']
 
         widgets = {
             'username': TextInput(attrs={'class': "m-1 form-control text-white bg-dark",
                                          'placeholder': "Username"}),
             'email': TextInput(attrs={'class': "m-1 form-control text-white bg-dark",
                                       'placeholder': "Email"}),
+            'preferred_currency': Select(attrs={'class': 'form-control text-white bg-dark'}),
             'password': PasswordInput(attrs={'class': "m-1 form-control text-white bg-dark",
                                              'placeholder': "Insert the password",
                                              'type': 'password'}),

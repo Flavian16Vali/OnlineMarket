@@ -6,6 +6,7 @@ app_name = 'app1'
 urlpatterns = [
     path('add_item/', views.CreateItemView.as_view(), name='add_item'),
     path('', views.ItemView.as_view(), name='list_items'),
+    # path('', views.my_view, name='my_view'),
     # path('', views.search_items, name='search_items'),
     # path('<int:pk>/detail/', views.detail, name='detail_item'),
     path('<int:pk>/detail/', views.ItemDetailView.as_view(), name='detail_item'),

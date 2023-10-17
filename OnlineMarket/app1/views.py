@@ -1,9 +1,11 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, ListView, UpdateView, DetailView
 
+from OnlineMarket.utils import ITEM_CHOICES
 from app1.forms import ItemClass
 from app1.models import Item
 
@@ -36,22 +38,13 @@ class ItemView(ListView):
 
     def get_queryset(self):
         search_query = self.request.GET.get('search', '')
+        category = self.request.GET.get('category', '')
 
-        queryset = Item.objects.filter(name__icontains=search_query)
+        queryset = Item.objects.filter(Q(name__icontains=search_query))
+        if category:
+            queryset = queryset.filter(type=category)
 
         return queryset
-
-# def search_items(request):
-#     query = request.GET.get('query', '')
-#     items = Item.objects
-#
-#     if query:
-#         items = items.filter(name__icontains=query)
-#
-#     return render(request, 'app1/item_index.html', {
-#         'items': items,
-#         'query': query,
-#     })
 
 
 class UpdateItemView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -102,3 +95,10 @@ class ItemDetailView(DetailView):
     def get_object(self, queryset=None):
         pk = self.kwargs.get('pk')
         return get_object_or_404(Item, id=pk)
+
+
+# def my_view(request):
+#     context = {
+#         'item_choices': ITEM_CHOICES,
+#     }
+#     return render(request, 'app1/item_index.html', context)
