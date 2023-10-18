@@ -35,6 +35,8 @@ class CreateItemView(LoginRequiredMixin, CreateView):
 class ItemView(ListView):
     model = Item
     template_name = 'app1/item_index.html'
+    paginate_by = 3
+    context_object_name = 'items'
 
     def get_queryset(self):
         search_query = self.request.GET.get('search', '')
