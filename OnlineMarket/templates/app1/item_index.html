@@ -3,35 +3,97 @@
 {% block title %}{{ item.name }}{{% endblock %}
 
 {% block content %}
-    <div class="m-1 col-5">
+    <div class="m-1 col-6">
             <form method="get" action="{% url 'app1:list_items' %}">
                 <div class="form-group">
-
-                    <input class="m-1 form-control text-white bg-dark" name="search" value="{{ query }}"
-                           type="text" placeholder="Find a toy, a video game, etc...">
-<!--                    <button class="m-1 btn btn-info">Search</button>-->
+                    {% if search_query %}
+                        <input class="m-1 form-control text-white bg-dark" name="search" value="{{ search_query }}"
+                               type="text" placeholder="Find a toy, a video game, etc...">
+                    {% else %}
+                        <input class="m-1 form-control text-white bg-dark" name="search" value="{{ query }}"
+                               type="text" placeholder="Find a toy, a video game, etc...">
+                    {% endif %}
 
                     <form method="get" action="{% url 'app1:list_items' %}">
 <!--                        <label for="category">Select a category:</label>-->
                         <select class="m-2 form-control text-white bg-dark" id="category" name="category">
-                            <option value="">All categories</option>
-                            <option value="Toys">Toys</option>
-                            <option value="Sport">Sport</option>
-                            <option value="Animals">Animals</option>
+                            {% if category == 'Toys' %}
+                                <option value="">All categories</option>
+                                <option value="Toys" selected="selected">Toys</option>
+                                <option value="Sport">Sport</option>
+                                <option value="Animals">Animals</option>
+
+                            {% elif category == 'Sport' %}
+                                <option value="">All categories</option>
+                                <option value="Toys">Toys</option>
+                                <option value="Sport" selected="selected">Sport</option>
+                                <option value="Animals">Animals</option>
+
+                            {% elif category == 'Animals' %}
+                                <option value="">All categories</option>
+                                <option value="Toys">Toys</option>
+                                <option value="Sport">Sport</option>
+                                <option value="Animals" selected="selected">Animals</option>
+
+                            {% else %}
+                                <option value="">All categories</option>
+                                <option value="Toys">Toys</option>
+                                <option value="Sport">Sport</option>
+                                <option value="Animals">Animals</option>
+                            {% endif %}
+
                         </select>
 
                         <select class="m-2 form-control text-white bg-dark" id="sort_by" name="sort_by">
-                            <option value="">Sort by</option>
-                            <option value="name">Name</option>
-                            <option value="price">Price</option>
-                            <option value="type">Type</option>
-                            <option value="posted_date">Date</option>
+                            {% if sort_by == 'name' %}
+                               <option value="">Sort by</option>
+                                <option value="name" selected="selected">Name</option>
+                                <option value="price">Price</option>
+                                <option value="type">Type</option>
+                                <option value="posted_date">Date</option>
+
+                            {% elif sort_by == 'price' %}
+                                <option value="">Sort by</option>
+                                <option value="name">Name</option>
+                                <option value="price" selected="selected">Price</option>
+                                <option value="type">Type</option>
+                                <option value="posted_date">Date</option>
+
+                            {% elif sort_by == 'type' %}
+                                <option value="">Sort by</option>
+                                <option value="name">Name</option>
+                                <option value="price">Price</option>
+                                <option value="type" selected="selected">Type</option>
+                                <option value="posted_date">Date</option>
+
+                            {% elif sort_by == 'posted_date' %}
+                                <option value="">Sort by</option>
+                                <option value="name">Name</option>
+                                <option value="price">Price</option>
+                                <option value="type">Type</option>
+                                <option value="posted_date" selected="selected">Date</option>
+                            {% else %}
+                                <option value="">Sort by</option>
+                                <option value="name">Name</option>
+                                <option value="price">Price</option>
+                                <option value="type">Type</option>
+                                <option value="posted_date">Date</option>
+                            {% endif %}
                         </select>
 
                         <select class="m-2 form-control text-white bg-dark" id="asc_desc" name="asc_desc">
-                            <option value="asc">Ascending</option>
-                            <option value="desc">Descending</option>
+                            {% if order_by == 'asc' %}
+                                <option value="asc" selected="selected">Ascending</option>
+                                <option value="desc">Descending</option>
+                            {% elif order_by == 'desc' %}
+                                <option value="asc">Ascending</option>
+                                <option value="desc" selected="selected">Descending</option>
+                            {% else %}
+                                <option value="asc">Ascending</option>
+                                <option value="desc">Descending</option>
+                            {% endif %}
                         </select>
+
                         <button class="m-1 btn btn-info" type="submit">Search</button>
                     </form>
                 </div>
@@ -85,9 +147,9 @@
 {% if is_paginated %}
         <ul class="pagination">
             {% if page_obj.has_previous %}
-                <li><a class="btn" href="?page={{ page_obj.previous_page_number }}"></a></li>
+                <li><a class="btn" href="?page={{ page_obj.previous_page_number }}"><span><<</span></a></li>
             {% else %}
-                <li class="disabled btn"><span><<</span></li>
+                <li class="disabled btn"><span></span></li>
             {% endif %}
             {% for i in paginator.page_range %}
                 {% if page_obj.number == i %}

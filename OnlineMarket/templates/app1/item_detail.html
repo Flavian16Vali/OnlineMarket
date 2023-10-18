@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
+
+{% block title %}{{ item.name }}{{% endblock %}
+
 {% block content %}
     <table class="my-5 table">
         <thead>
             <tr>
-                <th>Index</th>
+<!--                <th>Index</th>-->
                 <th>Name</th>
                 <th>Price</th>
                 <th>Currency</th>
@@ -18,7 +21,7 @@
         </thead>
         <tbody>
                 <tr>
-                    <td>{{ forloop.counter }}</td>
+<!--                    <td>{{ forloop.counter }}</td>-->
                     <td>{{ item.name }}</td>
                     <td>{{ item.price }}</td>
                     <td>{{ item.currency }}</td>
@@ -53,7 +56,7 @@
                             {% else %}
                                 <a class="btn btn-dark text-white" href="#">Buy</a>
                             {% endif %}
-                            <a class="btn btn-info" href="#">Contact</a>
+                            <a class="btn btn-info" href="{% url 'conversation:new_conversation' item.id %}">Contact</a>
                         {% else %}
                             <a class="btn btn-success" href="{% url 'login' %}">Login</a>
                         {% endif %}

@@ -56,6 +56,15 @@ class ItemView(ListView):
 
         return queryset
 
+    def get_context_data(self, **kwargs):
+        data = super(ItemView, self).get_context_data(**kwargs)
+        data['search_query'] = self.request.GET.get('search')
+        data['category'] = self.request.GET.get('category')
+        data['sort_by'] = self.request.GET.get('sort_by')
+        data['order_by'] = self.request.GET.get('asc_desc')
+
+        return data
+
 
 class UpdateItemView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Item
