@@ -137,4 +137,4 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SESSION_COOKIE_AGE = 1800
 LOGIN_URL = '/'
 
-# AUTH_USER_MODEL = 'userprofile.CustomUser'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
