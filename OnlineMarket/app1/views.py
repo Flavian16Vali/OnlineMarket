@@ -39,10 +39,18 @@ class ItemView(ListView):
     def get_queryset(self):
         search_query = self.request.GET.get('search', '')
         category = self.request.GET.get('category', '')
+        sort_by = self.request.GET.get('sort_by', '')
+        asc_desc = self.request.GET.get('asc_desc', '')
 
         queryset = Item.objects.filter(Q(name__icontains=search_query))
         if category:
             queryset = queryset.filter(type=category)
+
+        if sort_by:
+            if asc_desc == 'asc':
+                queryset = queryset.order_by(sort_by, 'id')
+            elif asc_desc == 'desc':
+                queryset = queryset.order_by('-' + sort_by, 'id')
 
         return queryset
 

@@ -14,14 +14,23 @@
                     <form method="get" action="{% url 'app1:list_items' %}">
 <!--                        <label for="category">Select a category:</label>-->
                         <select class="m-2 form-control text-white bg-dark" id="category" name="category">
-<!--                            <option value="">All categories</option>-->
-<!--                            {% for choice in ITEM_CHOICES %}-->
-<!--                                <option value="{{ choice.0 }}">{{ choice.1 }}</option>-->
-<!--                            {% endfor %}-->
                             <option value="">All categories</option>
                             <option value="Toys">Toys</option>
                             <option value="Sport">Sport</option>
                             <option value="Animals">Animals</option>
+                        </select>
+
+                        <select class="m-2 form-control text-white bg-dark" id="sort_by" name="sort_by">
+                            <option value="">Sort by</option>
+                            <option value="name">Name</option>
+                            <option value="price">Price</option>
+                            <option value="type">Type</option>
+                            <option value="posted_date">Date</option>
+                        </select>
+
+                        <select class="m-2 form-control text-white bg-dark" id="asc_desc" name="asc_desc">
+                            <option value="asc">Ascending</option>
+                            <option value="desc">Descending</option>
                         </select>
                         <button class="m-1 btn btn-info" type="submit">Search</button>
                     </form>
