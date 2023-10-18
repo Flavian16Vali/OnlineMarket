@@ -6,6 +6,7 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, ListView, UpdateView
 
 from userprofile.forms import CreateNewAccountForm
+from userprofile.models import CustomUser
 
 
 # Create your views here.
@@ -31,14 +32,10 @@ class AccountView(LoginRequiredMixin, ListView):
 
 
 class UpdateUserView(LoginRequiredMixin, UpdateView):
-    model = User
+    model = CustomUser
     template_name = 'app1/item_form.html'
     form_class = CreateNewAccountForm
 
-    # def get_form_kwargs(self, **kwargs):
-    #     data = super(UpdateUserView, self).get_form_kwargs()
-    #     data.update({'pk': self.kwargs['pk']})
-    #     return data
     def form_valid(self, form):
         if form.is_valid():
             user_instance = form.save(commit=False)

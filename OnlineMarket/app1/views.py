@@ -95,10 +95,3 @@ class ItemDetailView(DetailView):
     def get_object(self, queryset=None):
         pk = self.kwargs.get('pk')
         return get_object_or_404(Item, id=pk)
-
-
-# def my_view(request):
-#     context = {
-#         'item_choices': ITEM_CHOICES,
-#     }
-#     return render(request, 'app1/item_index.html', context)

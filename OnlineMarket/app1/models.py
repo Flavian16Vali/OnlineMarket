@@ -22,20 +22,7 @@ class Item(models.Model):
     # id_user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     currency = models.CharField(max_length=5, choices=CURRENCY_CHOICES)
     posted_date = models.DateTimeField(default=datetime.now)
-    # edited_date = models.DateTimeField(default=datetime.now)
     edited_date = models.DateTimeField(auto_now=True, blank=True)
-
-    # @property
-    # def edit_time(self):
-    #     return self.edited_date
-    #
-    # @edit_time.setter
-    # def edit_time(self, value=datetime.now):
-    #     self.edited_date = value
-
-    # def __init__(self, *args, **kwargs):
-    #     self.edited_date = models.DateTimeField(default=datetime.now)
-    #     super().__init__(*args, **kwargs)
 
     def __str__(self):
         return f'{self.name}, {self.price}'

@@ -31,20 +31,21 @@ class CreateNewAccountForm(forms.ModelForm):
                                              'type': 'password'}),
         }
 
-    # def __init__(self, pk, *args, **kwargs):
-    #     super(CreateNewAccountForm, self).__init__(*args, **kwargs)
-    #     self.pk = pk
-
     def clean(self):
         field_data = self.cleaned_data
         username_value = field_data.get('username')
         email_value = field_data.get('email')
-        if User.objects.filter(username=username_value).exists():
+
+        current_object_id = self.instance.id
+        existing_usernames = User.objects.filter(username=username_value).exclude(id=current_object_id).exists()
+        existing_email = User.objects.filter(username=email_value).exclude(id=current_object_id).exists()
+
+        if existing_usernames:
             msg = 'This username is already used'
             self._errors['username'] = self.error_class([msg])
-        if User.objects.filter(email=email_value).exists():
+        if existing_email:
             msg = 'This email is already used'
-            self._errors['email'] = self.error_class([msg])
+            self._errors['username'] = self.error_class([msg])
 
         password_value = self.cleaned_data.get('password')
         confirm_password_value = self.cleaned_data.get('confirm_password')
