@@ -27,7 +27,6 @@ urlpatterns = [
     path('', LoginView.as_view(template_name='registration/login.html'), name='login'),
     path('item/', include('app1.urls')),
     path('userprofile/', include('userprofile.urls')),
-    path('conversation/', include('conversation.urls')),
 ]
 
 if settings.DEBUG:
