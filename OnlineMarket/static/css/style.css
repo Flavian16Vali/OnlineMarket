@@ -38,3 +38,8 @@
 .clear {
     clear: both;
 }
+
+
+div:hover {
+  background-color: lightcoral;
+}

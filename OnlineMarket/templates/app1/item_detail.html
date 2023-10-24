@@ -56,7 +56,7 @@
                             {% else %}
                                 <a class="btn btn-dark text-white" href="#">Buy</a>
                             {% endif %}
-                            <a class="btn btn-info" href="#">Contact</a>
+                            <a class="btn btn-info" href="{% url 'message:new_conversation' item.id %}">Contact</a>
                         {% else %}
                             <a class="btn btn-success" href="{% url 'login' %}">Login</a>
                         {% endif %}
