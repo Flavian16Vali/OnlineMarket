@@ -3,16 +3,16 @@
 }
 
 .container {
-    display: flex; /* Acesta este un stil CSS care face ca elementele să fie așezate pe același rând */
+    display: flex;
 }
 
 .input {
-    margin-right: 70px; /* Spațiu între input și buton */
+    margin-right: 70px;
 }
 
 .form-group {
     display: flex;
-        align-items: center;
+    align-items: center;
 }
 .form-group input {
     margin-right: 10px;
@@ -37,9 +37,4 @@
 
 .clear {
     clear: both;
-}
-
-
-div:hover {
-  background-color: lightcoral;
 }

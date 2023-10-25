@@ -10,5 +10,6 @@ class ConversationMessageForm(forms.ModelForm):
         fields = ['content',]
 
         widgets = {
-            'content': TextInput(attrs={'placeholder': 'Item name', 'class': 'form-control text-white bg-dark'}),
+            'content': TextInput(attrs={'placeholder': 'Write your message here...',
+                                        'class': 'form-control text-white bg-dark'}),
         }

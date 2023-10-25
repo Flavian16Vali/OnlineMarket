@@ -51,12 +51,7 @@
                                 <a class="btn btn-warning" href="{% url 'app1:deactivate_item' item.id %}">Deactivate</a>
                             {% endif %}
                         {% elif request.user.is_authenticated %}
-                            {% if item.active is True %}
-                                <a class="btn btn-success" href="#">Buy</a>
-                            {% else %}
-                                <a class="btn btn-dark text-white" href="#">Buy</a>
-                            {% endif %}
-                            <a class="btn btn-info" href="{% url 'message:new_conversation' item.id %}">Contact</a>
+                            <a class="btn btn-info" href="{% url 'message:new_conversation' item.id %}">Contact seller</a>
                         {% else %}
                             <a class="btn btn-success" href="{% url 'login' %}">Login</a>
                         {% endif %}

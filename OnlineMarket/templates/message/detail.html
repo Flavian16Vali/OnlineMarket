@@ -2,22 +2,27 @@
 
 
 {% block content %}
-    <h1>Inbox</h1>
+<h1>Inbox</h1>
 
-    <div>
-        {% for message in conversation.messages.all %}
-                <div style="padding-bottom: 20px;">
-                    <div class="{% if message.created_by == request.user.customuser %} bg-primary {% else %} bg-info {% endif %}">
-                        <div class="m-2">
-                            <p class="m-2 small"><strong>{{ message.created_by.username }}</strong> at {{ message.created_at }}</p>
-                            <p class="m-2">{{ message.content }}</p>
-                        </div>
+<div>
+    {% for message in conversation.messages.all %}
+        <div style="padding-bottom: 20px;
+        {% if message.created_by == request.user.customuser %} padding-left: 550px;
+        {% else %}padding-right: 550px; {% endif %}">
+            {% if message.created_by == request.user.customuser %}
+                <div class="col btn btn-primary small" style="text-align: right; display: block;">
+            {% else %}
+                <div class="col btn btn-info" style="text-align: left; display: block;">
+            {% endif %}
 
-                    </div>
+                <div class="m-2">
+                    <p class="m-2 small"><strong>{{ message.created_by.username }}</strong> at {{ message.created_at }}</p>
+                    <p class="m-2">{{ message.content }}</p>
                 </div>
-
-        {% endfor %}
-    </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
 
 <form method="post" action="">
     {% csrf_token %}

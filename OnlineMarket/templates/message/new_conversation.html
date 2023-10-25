@@ -1,19 +1,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>Conversation about the {{ item.name }}</h1>
+<h1>Conversation about the {{ item.name }}</h1>
 
-  <div id="conversation" class="m-2">
-    {% for message in messages %}
-      <div>
-        <strong>{{ message.sender }}: </strong> {{ message.content }} <strong class="small">{{ message.timestamp }}</strong>
-      </div>
-    {% endfor %}
-  </div>
+<div id="conversation" class="m-2">
+  {% for message in messages %}
+    <div>
+      <strong>{{ message.sender }}: </strong> {{ message.content }} <strong class="small">{{ message.timestamp }}</strong>
+    </div>
+  {% endfor %}
+</div>
 
-  <form method="post" action="">
-    {% csrf_token %}
-    {{ form.content }}
-    <input type="submit" value="Send" class="m-1 btn btn-dark">
-  </form>
+<form method="post" action="">
+  {% csrf_token %}
+  {{ form.content }}
+  <input type="submit" value="Send" class="m-1 btn btn-dark">
+</form>
 {% endblock %}
